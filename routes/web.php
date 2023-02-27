@@ -13,12 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return "Selamat Datang";
+Route::get('/', [HomeController::class, 'index']);
+
+Route::prefix('/category')->group(function(){
+    Route::get('/games', [ProductsController::class, 'games']);
+    Route::get('/magang', [ProductsController::class, 'magang']);
+    Route::get('/kunjungan', [ProductsController::class, 'kunjungan']);
 });
 
-Route::get('/about', function () {
-    return "NIM: 2141720082, Nama: Hans Andi Wijaya";
+route::get('/news/{id}', [NewsController::class, 'news']);
+
+Route::prefix('/program')->group(function(){
+    Route::get('/karir', [ProgramController::class, 'karir']);
+    Route::get('/magang', [ProgramController::class, 'magang']);
+    Route::get('/kunjungan', [ProgramController::class, 'kunjungan']);
 });
 
-Route::get('/articles/{id}', [PageController::class, 'article']);
+Route::get('/about-us', [AboutUsController::class, 'index']);
+route::resource('contact-us', ContactUsController::class);
